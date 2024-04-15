@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from "react-helmet";
 
 export default function Register() {
   const [errorMessage,setErrorMessage] = useState("")
@@ -50,6 +51,9 @@ export default function Register() {
   });
   return (
     <Fragment>
+      <Helmet>
+        <title>Register</title>
+      </Helmet>
       <div className="w-50 m-auto my-5">
         <h1>Register Now :</h1>
         {errorMessage == "" ? null : (

@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/AuthContext";
+import { Helmet } from "react-helmet";
 
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -51,6 +52,12 @@ export default function Login() {
   });
   return (
     <Fragment>
+      {" "}
+      <Helmet>
+ 
+        <title>Login</title>
+   
+      </Helmet>
       <div className="w-50 m-auto my-5">
         <h1>Login Now :</h1>
         {errorMessage == "" ? null : (

@@ -24,6 +24,7 @@ a , a:hover{
     color: black;
     text-decoration: none;
 }
+
 .product:hover
 {
     box-shadow: var(--shadow);
@@ -56,4 +57,17 @@ a , a:hover{
 .bg-main-light 
 {
     background-color: var(--light-color) !important;
+}
+header .slick-next:before {
+    content: '';
+}
+header button.slick-arrow.slick-next{
+    display: none;
+}
+header .slick-dots{bottom:-15px}
+.header img{height: 400px;
+width: 100%;}
+.header1 img {
+    height: 200px;
+    width: 100%;
 }
