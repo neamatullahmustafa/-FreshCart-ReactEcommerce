@@ -9,9 +9,15 @@ import AuthContextProvider from "./Context/AuthContext";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./index.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+import CartContextProvider from "./Context/CartContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
+let reactQuery =new QueryClient();
 root.render(
-  <AuthContextProvider>
-    <App />
-  </AuthContextProvider>
+  <CartContextProvider>
+  <QueryClientProvider client={reactQuery}>
+    <AuthContextProvider>
+      <App />
+    </AuthContextProvider>
+  </QueryClientProvider></CartContextProvider>
 );

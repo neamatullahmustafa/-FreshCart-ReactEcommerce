@@ -12,6 +12,7 @@ import NotFound from './Components/NotFound/NotFound';
 import { useContext, useEffect } from 'react';
 import { authContext } from './Context/AuthContext';
 import ProtectedRoutes from './Components/ProtectedRoutes/ProtectedRoutes';
+import ProductDetails from './Components/ProductDetails/ProductDetails';
 
 let routes = createBrowserRouter([
   {
@@ -20,11 +21,41 @@ let routes = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "Home", element: <Home /> },
-      { path: "Products", element:<ProtectedRoutes><Products /></ProtectedRoutes>  },
-      { path: "Cart", element:<ProtectedRoutes><Cart /></ProtectedRoutes>  },
-      { path: "Categories", element:<ProtectedRoutes><Categories /> </ProtectedRoutes> },
-      { path: "Brands", element:<ProtectedRoutes><Brands /> </ProtectedRoutes> },
+      {
+        path: "Products",
+        element: (
+          <ProtectedRoutes>
+            <Products />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "Cart",
+        element: (
+          <ProtectedRoutes>
+            <Cart />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "Categories",
+        element: (
+          <ProtectedRoutes>
+            <Categories />{" "}
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "Brands",
+        element: (
+          <ProtectedRoutes>
+            <Brands />{" "}
+          </ProtectedRoutes>
+        ),
+      },
       { path: "Login", element: <Login /> },
+      { path: "ProductDetails/:id", element: <ProductDetails /> },
+
       { path: "Register", element: <Register /> },
       { path: "*", element: <NotFound /> },
     ],

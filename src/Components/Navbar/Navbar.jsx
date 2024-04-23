@@ -56,6 +56,11 @@ export default function Navbar() {
                     <Link className="nav-link" to="/brands">
                       Brands
                     </Link>
+                  </li>{" "}
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/cart">
+                      Cart
+                    </Link>
                   </li>
                 </ul>
               </Fragment>

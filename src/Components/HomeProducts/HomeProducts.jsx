@@ -1,32 +1,52 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import styles from './HomeProducts.module.css';
 import axios from "axios";
+import { useQuery } from "react-query";
+import { cartContext ,addToCart } from '../../Context/CartContext';
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export default function HomeProducts() {
     const [pro, setPro] = useState([]);
-
-    useEffect(() => {
-      async function getPro() {
-        try {
-          const response = await axios.get(
-            "https://ecommerce.routemisr.com/api/v1/products"
+let { addToCart } = useContext(cartContext);
+    // useEffect(() => {
+    //   async function getPro() {
+    //     try {
+    //       const response = await axios.get(
+    //         "https://ecommerce.routemisr.com/api/v1/products"
+    //       );
+    //       setPro(response.data.data);
+    //       console.log(response.data.data);
+    //     } catch (error) {
+    //       console.error("Error fetching categories:", error);
+    //     }
+    //   }
+    //   getPro();
+  // }, []);
+  function getPro() {
+ return axios.get(
+          "https://ecommerce.routemisr.com/api/v1/products"
           );
-          setPro(response.data.data);
-          console.log(response.data.data);
-        } catch (error) {
-          console.error("Error fetching categories:", error);
-        }
-      }
-      getPro();
-    }, []);
 
+     }
+  let {data, isLoading} = useQuery("homeProducts", getPro)
+ async function addCart(id) {
+   let res = await addToCart(id);
+  if (res.data.status == "success"){
+    toast.success("Product add to cart") 
+     
+  }
+  else {
+    toast.error("product not add to cart")
+   }
+ }
   return (
     <Fragment>
       <h4>Products</h4>
       <div className="container">
         <div className="row row-cols-md-4  row-cols-sm-2 row-cols-lg-5">
-          {pro.map((item, index) => (
-            <div key={index} className="product overflow-hidden">
+          {data?.data?.data.map((item, index) => (
+            <div key={index} className="product overflow-hidden"> <Link to={"/ProductDetails/"+item.id}>
               <img
                 src={item.imageCover}
                 height={200}
@@ -41,8 +61,8 @@ export default function HomeProducts() {
                   <i className="fa fa-star rating-color"></i>
                   {item.ratingsAverage}
                 </p>
-              </div>
-              <button className="btn bg-main text-white w-100">
+              </div></Link>
+              <button onClick={()=>addCart(item.id)} className="btn bg-main text-white w-100">
                 Add to cart
               </button>
             </div>
