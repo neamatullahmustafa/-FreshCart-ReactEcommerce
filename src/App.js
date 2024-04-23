@@ -13,6 +13,8 @@ import { useContext, useEffect } from 'react';
 import { authContext } from './Context/AuthContext';
 import ProtectedRoutes from './Components/ProtectedRoutes/ProtectedRoutes';
 import ProductDetails from './Components/ProductDetails/ProductDetails';
+import CheckOut from './Components/CheckOut/CheckOut';
+import AllOrders from './Components/AllOrders/AllOrders';
 
 let routes = createBrowserRouter([
   {
@@ -34,6 +36,22 @@ let routes = createBrowserRouter([
         element: (
           <ProtectedRoutes>
             <Cart />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "allOrders",
+        element: (
+          <ProtectedRoutes>
+            <AllOrders />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "CheckOut",
+        element: (
+          <ProtectedRoutes>
+            <CheckOut />
           </ProtectedRoutes>
         ),
       },

@@ -19,7 +19,18 @@ function addToCart(id) {
      .then((res) => res)
      .catch((err) => err);
 }
+function deleteCartProducts() {
+  return axios
+    .delete(
+      `https://ecommerce.routemisr.com/api/v1/cart/`,
 
+      {
+        headers,
+      }
+    )
+    .then((res) => res)
+    .catch((err) => err);
+}
 function deleteCartProduct(id) {
   return axios
     .delete(
@@ -56,11 +67,31 @@ function getCart() {
     )
     .then((res) => res)
     .catch((err) => err);
+} 
+function payment(shippingAddress) {
+  let id = localStorage.getItem("cartId");
+  return axios
+    .post(
+      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}?url=http://localhost:3000`,
+
+      { shippingAddress },
+      {
+        headers,
+      }
+    )
+    .then((res) => res)
+    .catch((err) => err);
 }
 export default function CartContextProvider({ children }) {
     return (
       <cartContext.Provider
-        value={{ addToCart, getCart, deleteCartProduct, updateCartProduct }}
+        value={{
+          addToCart,
+          getCart,
+          deleteCartProduct,
+          updateCartProduct,
+          payment,
+        }}
       >
         {children}
       </cartContext.Provider>

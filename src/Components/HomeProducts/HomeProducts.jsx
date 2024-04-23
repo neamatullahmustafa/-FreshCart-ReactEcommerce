@@ -32,13 +32,16 @@ let { addToCart } = useContext(cartContext);
   let {data, isLoading} = useQuery("homeProducts", getPro)
  async function addCart(id) {
    let res = await addToCart(id);
-  if (res.data.status == "success"){
+ localStorage.setItem("cartId", res.data.data._id);
+
+  if (res?.data?.status == "success"){
     toast.success("Product add to cart") 
      
   }
   else {
     toast.error("product not add to cart")
-   }
+  }
+   console.log(res.data.data)
  }
   return (
     <Fragment>

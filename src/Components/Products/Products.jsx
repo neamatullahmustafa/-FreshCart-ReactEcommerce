@@ -15,6 +15,9 @@ export default function Products() {
   let { data, isLoading } = useQuery("homeProducts", getPro);
  async function addCart(id) {
    let res = await addToCart(id);
+   console.log(res.data.data._id)
+              localStorage.setItem("cartId", res.data.data._id);
+
    if (res.data.status == "success") {
      toast.success("Product add to cart");
    } else {
